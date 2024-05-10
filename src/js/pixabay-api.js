@@ -13,7 +13,7 @@ export const fetchPhotosByQuery = (query = 'cat') => {
 
     return fetch(`${BASE_URL}?${searchParams}`).then(response => {
     if (!response.ok) {
-      throw new Error(response.statusText);
+      throw new Error('Sorry, there are no images matching your search query. Please try again!');
     }
 
     return response.json();
