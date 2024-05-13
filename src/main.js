@@ -45,11 +45,11 @@ function onSearchFormSubmit(event) {
                     color: 'red',
                 });
 
-                galleryEl.innerHTML = '';
+                listGallery.innerHTML = '';
                 return;
             }
 
-            listGallery.innerHTML = createGalleryItemMarkup(imagesData.results);
+            listGallery.innerHTML = createGalleryItemMarkup(imagesData);
 
             if (lightbox) {
                 lightbox.destroy();
@@ -57,6 +57,8 @@ function onSearchFormSubmit(event) {
             lightbox = new SimpleLightbox('.js-gallery a', {
                 captionDelay: 250,
             });
+
+            event.target.reset();
         
         })
 
@@ -68,6 +70,7 @@ function onSearchFormSubmit(event) {
                 timeout: 2000,
                 color: 'red',
             });
+            event.target.reset();
         })
 
         .finally(() => {
