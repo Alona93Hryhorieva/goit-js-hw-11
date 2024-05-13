@@ -6,23 +6,23 @@ import{i as n,S as u}from"./assets/vendor-8c59ed88.js";(function(){const s=docum
                       <div class="image-details">
                          <ul class="details-title">
                              <li class="details-title-det">
-                                  <h3 class="title-info">Likes:</h3>
+                                  <h3 class="title-info">Likes</h3>
                                   <p class="paragraph-info">${e}</p>
                                 </li>
                                 <li class="details-title-det">
-                                 <h3 class="title-info">Views:</h3>
+                                 <h3 class="title-info">Views</h3>
                                  <p class="paragraph-info">${r}</p>
                                </li>  
                              <li class="details-title-det">
-                                 <h3 class="title-info">Comments:</h3>
+                                 <h3 class="title-info">Comments</h3>
                                  <p class="paragraph-info">${l}</p>
                              </li>  
                               <li class="details-title-det">
-                                  <h3 class="title-info">Downloads:</h3>
+                                  <h3 class="title-info">Downloads</h3>
                                   <p class="paragraph-info">${h}</p>
                               </li>
                  
                             </ul>
                       </div>
-                  </li>`).join(""),g=document.querySelector(".js-search-form"),a=document.querySelector(".gallery-list"),d=document.querySelector(".loader");document.querySelector(".js-search-input");document.querySelector(".search-btn");let c;function L(o){o.preventDefault();const s=o.target.elements.searchKeyword.value.trim();if(s===""){a.innerHTML="",o.target.reset(),n.show({message:"Input field cannot be empty",position:"topRight",timeout:2e3,color:"red"});return}a.innerHTML="",d.classList.remove("is-hidden"),m(s).then(t=>{if(console.log("Received data:",t),t.hits.length===0||!t.hits){n.show({message:"Sorry, there are no images for this query",position:"topRight",timeout:2e3,color:"red"}),a.innerHTML="";return}a.innerHTML=y(t.hits),c&&c.destroy(),c=new u(".js-gallery a",{captionDelay:250})}).catch(t=>{console.error("Error fetching photos:",t),n.show({message:"An error occurred while fetching photos",position:"topRight",timeout:2e3,color:"red"})}).finally(()=>{o.target.reset(),console.log("Adding is-hidden class"),d.classList.add("is-hidden")})}g.addEventListener("submit",L);
+                  </li>`).join(""),g=document.querySelector(".js-search-form"),a=document.querySelector(".gallery-list"),d=document.querySelector(".loader");let c;function L(o){o.preventDefault();const s=o.target.elements.searchKeyword.value.trim();if(s===""){a.innerHTML="",o.target.reset(),n.show({message:"Input field cannot be empty",position:"topRight",timeout:2e3,color:"red"});return}a.innerHTML="",d.classList.remove("is-hidden"),m(s).then(t=>{if(console.log("Received data:",t),t.hits.length===0||!t.hits){n.show({message:"Sorry, there are no images for this query",position:"topRight",timeout:2e3,color:"red"}),a.innerHTML="";return}a.innerHTML=y(t.hits),c&&c.destroy(),c=new u(".js-gallery a",{captionDelay:250})}).catch(t=>{console.error("Error fetching photos:",t),n.show({message:"An error occurred while fetching photos",position:"topRight",timeout:2e3,color:"red"})}).finally(()=>{o.target.reset(),d.classList.add("is-hidden")})}g.addEventListener("submit",L);
 //# sourceMappingURL=commonHelpers.js.map
