@@ -1,17 +1,14 @@
-import iziToast from "izitoast"; 
-import "izitoast/dist/css/iziToast.min.css"; 
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
-import SimpleLightbox from "simplelightbox"; 
-import "simplelightbox/dist/simple-lightbox.min.css"; 
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
-import { fetchPhotosByQuery } from './js/pixabay-api.js'; 
-import { createGalleryItemMarkup } from './js/render-functions.js'; 
+import { fetchPhotosByQuery } from './js/pixabay-api.js';
+import { createGalleryItemMarkup } from './js/render-functions.js';
 
-
-const searchForm = document.querySelector('.js-search-form'); 
-const searchInput = document.querySelector('.js-search-input'); 
-const searchBtn = document.querySelector('.search-btn'); 
-const listGallery = document.querySelector('.gallery-list'); 
+const searchForm = document.querySelector('.js-search-form');
+const listGallery = document.querySelector('.gallery-list');
 const loader = document.querySelector('.loader');
 
 let lightbox;
@@ -21,8 +18,6 @@ function onSearchFormSubmit(event) {
     const searchQuery = event.target.elements.searchKeyword.value.trim();
 
     if (searchQuery === '') {
-        listGallery.innerHTML = '';
-        event.target.reset();
         iziToast.show({
             message: 'Sorry, there are no images matching your search query. Please try again!',
             position: 'topRight',
@@ -44,8 +39,6 @@ function onSearchFormSubmit(event) {
                     timeout: 2000,
                     color: 'red',
                 });
-
-                listGallery.innerHTML = '';
                 return;
             }
 
@@ -57,11 +50,7 @@ function onSearchFormSubmit(event) {
             lightbox = new SimpleLightbox('.js-gallery a', {
                 captionDelay: 250,
             });
-
-            event.target.reset();
-        
         })
-
         .catch(error => {
             console.error('Error fetching photos:', error);
             iziToast.show({
@@ -70,14 +59,10 @@ function onSearchFormSubmit(event) {
                 timeout: 2000,
                 color: 'red',
             });
-            event.target.reset();
         })
-
         .finally(() => {
-            event.target.reset();
             loader.classList.add('is-hidden');
         });
-    
 }
 
 searchForm.addEventListener('submit', onSearchFormSubmit);
