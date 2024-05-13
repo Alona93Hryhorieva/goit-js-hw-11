@@ -14,9 +14,10 @@ const searchBtn = document.querySelector('.search-btn');
 const listGallery = document.querySelector('.gallery-list'); 
 const loader = document.querySelector('.loader');
 
+let lightbox;
 
 function onSearchFormSubmit(event) {
-    event.preventDefault(); 
+    event.preventDefault();
     const searchQuery = event.target.elements.searchKeyword.value.trim();
 
     if (searchQuery === '') {
@@ -35,45 +36,45 @@ function onSearchFormSubmit(event) {
     loader.classList.remove('is-hidden');
 
     fetchPhotosByQuery(searchQuery)
-    .then(imagesData => {
-        if (imagesData.hits.length === 0) {
+        .then(imagesData => {
+            if (imagesData.hits.length === 0) {
+                iziToast.show({
+                    message: 'Sorry, there are no images for this query',
+                    position: 'topRight',
+                    timeout: 2000,
+                    color: 'red',
+                });
+
+                galleryEl.innerHTML = '';
+                return;
+            }
+
+            listGallery.innerHTML = createGalleryItemMarkup(imagesData.results);
+
+            if (lightbox) {
+                lightbox.destroy();
+            }
+            lightbox = new SimpleLightbox('.js-gallery a', {
+                captionDelay: 250,
+            });
+        
+        })
+
+        .catch(error => {
+            console.error('Error fetching photos:', error);
             iziToast.show({
-                message: 'Sorry, there are no images for this query',
+                message: 'An error occurred while fetching photos',
                 position: 'topRight',
                 timeout: 2000,
                 color: 'red',
             });
-        }
+        })
 
-        listGallery.innerHTML = createGalleryItemMarkup(imagesData.results);
-
-    })
-
-
-
-//       imgContainer.innerHTML = createMarkup(imagesData.hits);
-//       const lightbox = new SimpleLightbox('.gallery a', {
-//         captionsData: 'alt',
-//         captionsDelay: 250,
-//       });
-//     /*   lightbox.refresh(); */
-//     })
-//     .catch(error => console.log(error))
-//     .finally(() => {
-//       event.target.reset();
-//       loaderEl.classList.add('is-hidden');
-//     });
-// }
-
-// searchForm.addEventListener('submit', onSearch);
-
-
-
-
-
-
-
-
+        .finally(() => {
+            event.target.reset();
+            loader.classList.add('is-hidden');
+        });
+    
 }
 
-searchForm.addEventListener("submit", onSearchFormSubmit);
+searchForm.addEventListener('submit', onSearchFormSubmit);
