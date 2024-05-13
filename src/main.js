@@ -10,6 +10,8 @@ import { createGalleryItemMarkup } from './js/render-functions.js';
 const searchForm = document.querySelector('.js-search-form');
 const listGallery = document.querySelector('.gallery-list');
 const loader = document.querySelector('.loader');
+const searchInput = document.querySelector('.js-search-input'); 
+const searchBtn = document.querySelector('.search-btn'); 
 
 let lightbox;
 
@@ -18,8 +20,10 @@ function onSearchFormSubmit(event) {
     const searchQuery = event.target.elements.searchKeyword.value.trim();
 
     if (searchQuery === '') {
+        listGallery.innerHTML = '';
+        event.target.reset();
         iziToast.show({
-            message: 'Sorry, there are no images matching your search query. Please try again!',
+            message: 'Input field cannot be empty',
             position: 'topRight',
             timeout: 2000,
             color: 'red',
@@ -32,19 +36,21 @@ function onSearchFormSubmit(event) {
 
     fetchPhotosByQuery(searchQuery)
         .then(imagesData => {
-            // console.log(imagesData); 
+            console.log('Received data:', imagesData); 
 
-            if (imagesData.hits.length === 0) {
+            if (imagesData.hits.length === 0 || !imagesData.hits) {
                 iziToast.show({
                     message: 'Sorry, there are no images for this query',
                     position: 'topRight',
                     timeout: 2000,
                     color: 'red',
                 });
+
+                listGallery.innerHTML = '';
                 return;
             }
 
-            listGallery.innerHTML = createGalleryItemMarkup(imagesData);
+            listGallery.innerHTML = createGalleryItemMarkup(imagesData.hits);
 
             if (lightbox) {
                 lightbox.destroy();
@@ -53,8 +59,9 @@ function onSearchFormSubmit(event) {
                 captionDelay: 250,
             });
         })
+        
         .catch(error => {
-            // console.error('Error fetching photos:', error);
+            console.error('Error fetching photos:', error);
             iziToast.show({
                 message: 'An error occurred while fetching photos',
                 position: 'topRight',
@@ -62,7 +69,10 @@ function onSearchFormSubmit(event) {
                 color: 'red',
             });
         })
+
         .finally(() => {
+            event.target.reset();
+            console.log('Adding is-hidden class');
             loader.classList.add('is-hidden');
         });
 }
