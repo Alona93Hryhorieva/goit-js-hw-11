@@ -3,7 +3,7 @@ export const createGalleryItemMarkup = images => {
         .map(
             ({ webformatURL, largeImageURL, tags, likes, view, comments, downloads }) => {
                 return (
-                   `<li class="gallery-item">
+                    `<li class="gallery-item">
                        <a class="gallery-link js-gallery-link" href='${largeImageURL}'>
                          <img src='${webformatURL}' alt='${tags}' title='${tags}'>
                       </a>
@@ -16,7 +16,7 @@ export const createGalleryItemMarkup = images => {
                                 </li>
                                 <li class="details-title-det">
                                  <h3 class="title-info">Views:</h3>
-                                 <p class="paragraph-info">'${views}'</p>
+                                 <p class="paragraph-info">'${view}'</p>
                                </li>  
                              <li class="details-title-det">
                                  <h3 class="title-info">Comments:</h3>
@@ -31,7 +31,8 @@ export const createGalleryItemMarkup = images => {
                       </div>
                   </li>`
                 );
-            };
-       ).join('');
+            }
+    
+        ).join('');
 }
       

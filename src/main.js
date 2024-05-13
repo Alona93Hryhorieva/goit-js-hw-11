@@ -32,7 +32,7 @@ function onSearchFormSubmit(event) {
 
     fetchPhotosByQuery(searchQuery)
         .then(imagesData => {
-            console.log(imagesData); 
+            // console.log(imagesData); 
 
             if (imagesData.hits.length === 0) {
                 iziToast.show({
