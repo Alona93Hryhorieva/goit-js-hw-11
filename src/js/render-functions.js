@@ -11,19 +11,19 @@ export const createGalleryItemMarkup = images => {
                       <div class="image-details">
                          <ul class="details-title">
                              <li class="details-title-det">
-                                  <h3 class="title-info">Likes:</h3>
+                                  <h3 class="title-info">Likes</h3>
                                   <p class="paragraph-info">${likes}</p>
                                 </li>
                                 <li class="details-title-det">
-                                 <h3 class="title-info">Views:</h3>
+                                 <h3 class="title-info">Views</h3>
                                  <p class="paragraph-info">${view}</p>
                                </li>  
                              <li class="details-title-det">
-                                 <h3 class="title-info">Comments:</h3>
+                                 <h3 class="title-info">Comments</h3>
                                  <p class="paragraph-info">${comments}</p>
                              </li>  
                               <li class="details-title-det">
-                                  <h3 class="title-info">Downloads:</h3>
+                                  <h3 class="title-info">Downloads</h3>
                                   <p class="paragraph-info">${downloads}</p>
                               </li>
                  

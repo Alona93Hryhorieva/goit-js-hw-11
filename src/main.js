@@ -10,8 +10,8 @@ import { createGalleryItemMarkup } from './js/render-functions.js';
 const searchForm = document.querySelector('.js-search-form');
 const listGallery = document.querySelector('.gallery-list');
 const loader = document.querySelector('.loader');
-const searchInput = document.querySelector('.js-search-input'); 
-const searchBtn = document.querySelector('.search-btn'); 
+// const searchInput = document.querySelector('.js-search-input'); 
+// const searchBtn = document.querySelector('.search-btn'); 
 
 let lightbox;
 
@@ -72,7 +72,6 @@ function onSearchFormSubmit(event) {
 
         .finally(() => {
             event.target.reset();
-            console.log('Adding is-hidden class');
             loader.classList.add('is-hidden');
         });
 }
