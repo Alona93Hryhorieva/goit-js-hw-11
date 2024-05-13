@@ -32,6 +32,8 @@ function onSearchFormSubmit(event) {
 
     fetchPhotosByQuery(searchQuery)
         .then(imagesData => {
+            console.log(imagesData); 
+
             if (imagesData.hits.length === 0) {
                 iziToast.show({
                     message: 'Sorry, there are no images for this query',
@@ -52,7 +54,7 @@ function onSearchFormSubmit(event) {
             });
         })
         .catch(error => {
-            console.error('Error fetching photos:', error);
+            // console.error('Error fetching photos:', error);
             iziToast.show({
                 message: 'An error occurred while fetching photos',
                 position: 'topRight',
